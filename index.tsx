@@ -1,3 +1,50 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+// --- ÖNEMLİ KURULUM TALİMATLARI ---
+// Form gönderimlerini alabilmek için kendi Google Apps Script'inizi oluşturmanız gerekir.
+// Şu adımları izleyin:
+// 1. Google E-Tablolar'a gidin (sheets.google.com) ve yeni bir boş e-tablo oluşturun.
+// 2. E-tabloya "Quest Gönderimleri" gibi bir isim verin.
+// 3. Menüden "Uzantılar" > "Apps Script" yolunu izleyin.
+// 4. Yeni bir script düzenleyici açılacaktır. `Code.gs` içindeki mevcut kodları silin.
+// 5. Aşağıdaki kodu kopyalayıp `Code.gs` içine yapıştırın:
+//
+//    function doPost(e) {
+//      try {
+//        var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+//        var data = JSON.parse(e.postData.contents);
+//
+//        // E-tablo boşsa başlıkları oluştur
+//        if (sheet.getLastRow() === 0) {
+//          sheet.appendRow(["Zaman Damgası", "Kullanıcı Adı", "Cüzdan"]);
+//        }
+//
+//        // Yeni veriyi ekle
+//        sheet.appendRow([new Date(), data.username, data.wallet]);
+//
+//        return ContentService
+//          .createTextOutput(JSON.stringify({ "result": "success", "message": "Veri alındı" }))
+//          .setMimeType(ContentService.MimeType.JSON);
+//      } catch (error) {
+//        return ContentService
+//          .createTextOutput(JSON.stringify({ "result": "error", "message": error.toString() }))
+//          .setMimeType(ContentService.MimeType.JSON);
+//      }
+//    }
+//
+// 6. Script'i kaydedin (Dosya > Projeyi kaydet).
+// 7. Sağ üstteki "Dağıt" düğmesine tıklayın ve "Yeni dağıtım" seçeneğini seçin.
+// 8. "Tür seçin" yanındaki dişli simgesine tıklayın ve "Web uygulaması" seçeneğini seçin.
+// 9. Yapılandırmada:
+//    - "Şu şekilde yürüt": "Ben" olarak seçin.
+//    - "Kimler erişebilir": "Herkes" olarak seçin. **Bu çok önemli!**
+// 10. "Dağıt" düğmesine tıklayın.
+// 11. İstendiğinde izinleri yetkilendirin.
+// 12. Dağıtımdan sonra bir "Web uygulaması URL'si" verilecektir. Bu URL'yi kopyalayın.
+// 13. Kopyaladığınız URL'yi aşağıdaki satıra yapıştırarak 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE' kısmını değiştirin.
 const GOOGLE_SCRIPT_URL =
   'https://script.google.com/macros/s/AKfycbzy6f_JKtKS_i5KAyDk9CeOfHsj2EPev60b7vaTpFoYPrjIJxkBSNLTHr9ClViFjNT89g/exec';
 
@@ -50,10 +97,8 @@ function playSound(sound: HTMLAudioElement | null) {
   }
 }
 
-const SECRET_PASSWORD = 'GOOFY'; // You can change this password
-const TWITTER_URL = 'https://x.com/GoofyBears';
-
-let currentStep = 0;
+const SECRET_PASSWORD = 'kumo'; // You can change this password
+const TWITTER_URL = 'https://x.com/kumoxworld';
 
 function showStep(stepIndex: number) {
   steps.forEach((step, index) => {
@@ -63,7 +108,6 @@ function showStep(stepIndex: number) {
       step.classList.remove('active');
     }
   });
-  currentStep = stepIndex;
 }
 
 function handlePasswordSubmit(event: Event) {
