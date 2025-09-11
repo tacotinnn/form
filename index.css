@@ -1,3 +1,4 @@
+
 *,
 *::before,
 *::after {
@@ -16,7 +17,7 @@ body {
   justify-content: center;
   color: white;
   text-align: center;
-  overflow: hidden;
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 .app-header {
@@ -29,6 +30,7 @@ body {
 #app-container {
   display: grid;
   place-items: center;
+  width: 100%;
 }
 
 .step {
@@ -62,6 +64,10 @@ body {
   cursor: pointer;
   position: relative;
   transition: transform 0.6s ease-in, opacity 0.5s ease-in 0.1s;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #start-quest-button.zooming {
@@ -242,6 +248,7 @@ form label {
 
 input[type='checkbox'] {
   appearance: none;
+  -webkit-appearance: none;
   width: 30px;
   height: 30px;
   background: white;
@@ -250,6 +257,7 @@ input[type='checkbox'] {
   cursor: pointer;
   position: relative;
   box-shadow: 4px 4px 0px black;
+  flex-shrink: 0;
 }
 
 input[type='checkbox']:checked {
@@ -404,5 +412,89 @@ button.yellow {
   60%,
   80% {
     transform: translateX(10px);
+  }
+}
+
+/* --- Responsive Design --- */
+
+/* For mobile phones */
+@media (max-width: 480px) {
+  body {
+    padding: 1rem; /* Add some space around the edges */
+  }
+
+  .app-header .logo {
+    width: 250px; /* Make the logo smaller */
+    height: auto;
+  }
+  
+  .step {
+    gap: 1.2rem; /* Reduce space between elements */
+    padding: 0 0.5rem; /* Add horizontal padding inside the step container */
+  }
+
+  /* Make the main retro computer graphic responsive */
+  .retro-computer-svg {
+    width: 100%;
+    max-width: 380px; /* It won't get bigger than this */
+    height: auto;
+  }
+  
+  /* Adjust the pointing arrow for smaller screens */
+  .arrow-svg {
+    width: 60px; /* Make the arrow smaller */
+    left: -15px; /* Move it closer to the computer */
+  }
+
+  /* Adjust font sizes for better readability */
+  .retro-text {
+    font-size: 32px;
+  }
+
+  input[type='text'],
+  input[type='password'],
+  button {
+    font-size: 1.2rem; /* Slightly smaller fonts on inputs/buttons */
+    padding: 0.8rem;
+    border-radius: 15px;
+    border-width: 3px;
+    box-shadow: 6px 6px 0px black;
+  }
+  
+  button:hover {
+    transform: translate(3px, 3px);
+    box-shadow: 3px 3px 0px black;
+  }
+
+  button:active {
+    transform: translate(6px, 6px);
+    box-shadow: 0px 0px 0px black;
+  }
+  
+  .checkbox-container label {
+    font-size: 1rem; /* Smaller checkbox label */
+  }
+
+  .success-title {
+    font-size: 2rem;
+  }
+  
+  .success-subtitle {
+    font-size: 1.5rem;
+  }
+}
+
+/* For very narrow screens */
+@media (max-width: 360px) {
+  .app-header .logo {
+    width: 200px; /* Even smaller logo */
+  }
+    
+  .retro-text {
+    font-size: 28px; /* Further reduce text on screen */
+  }
+
+  .arrow-svg {
+    display: none; /* Hide the arrow on very small screens to prevent clutter */
   }
 }
