@@ -1,8 +1,7 @@
-
 import { defineConfig } from 'vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  // Projenizin küçük ve basit olduğu için özel bir yapılandırmaya ihtiyacı yok.
-  // Bu temel dosya yeterlidir.
+  // This basic file is sufficient as the project is small and simple
+  // and does not require any special configuration.
 })
