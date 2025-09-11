@@ -1,0 +1,6 @@
+{
+  "name": "Quest",
+  "description": "Complete the quest to be eligible for rewards.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
