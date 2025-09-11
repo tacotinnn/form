@@ -192,10 +192,8 @@ if (startButton) {
       });
     }
 
-    /
     startButton.classList.add('zooming');
 
-    
     setTimeout(() => {
       showStep(1);
       
