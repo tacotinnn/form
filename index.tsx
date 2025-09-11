@@ -98,7 +98,7 @@ function playSound(sound: HTMLAudioElement | null) {
 }
 
 const SECRET_PASSWORD = 'goofy'; // You can change this password
-const TWITTER_URL = 'https://x.com/GoofyBears';
+const TWITTER_URL = 'https://x.com/BearsGoofy';
 
 function showStep(stepIndex: number) {
   steps.forEach((step, index) => {
