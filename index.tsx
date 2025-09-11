@@ -55,8 +55,8 @@ function playSound(sound: HTMLAudioElement | null) {
   }
 }
 
-const SECRET_PASSWORD = 'kumo'; 
-const TWITTER_URL = 'https://x.com/kumoxworld';
+const SECRET_PASSWORD = 'goofy'; 
+const TWITTER_URL = 'https://x.com/BearsGoofy';
 
 function showStep(stepIndex: number) {
   steps.forEach((step, index) => {
