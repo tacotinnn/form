@@ -1,4 +1,5 @@
 
+
 *,
 *::before,
 *::after {
@@ -23,8 +24,25 @@ body {
 .app-header {
   position: absolute;
   top: 1rem;
-  left: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 10;
+  cursor: pointer;
+}
+
+.logo-text {
+  animation: float-logo 3s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes float-logo {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(1deg);
+  }
 }
 
 #app-container {
