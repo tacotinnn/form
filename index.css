@@ -1,248 +1,518 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GOOFY BEARS</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Pixelify+Sans:wght@500&family=VT323&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="index.css" />
-  <script type="importmap">
-{
-  "imports": {
-    "vite": "https://aistudiocdn.com/vite@^7.1.5"
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Luckiest Guy', cursive;
+  background-image: none;
+  background-color: #eae3d9; /* New cream background */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.app-header {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  cursor: pointer;
+}
+
+.logo-text {
+  animation: float-logo 3s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes float-logo {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(1deg);
   }
 }
-</script>
-</head>
-  <body>
-    <header class="app-header" id="logo-header">
-      <svg
-        class="logo"
-        width="400"
-        height="70"
-        viewBox="0 0 400 70"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <defs>
-          <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style="stop-color: #fdd835; stop-opacity: 1" />
-            <stop offset="100%" style="stop-color: #ff85b3; stop-opacity: 1" />
-          </linearGradient>
-          <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feOffset result="offOut" in="SourceAlpha" dx="4" dy="4" />
-            <feGaussianBlur result="blurOut" in="offOut" stdDeviation="1" />
-            <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
-          </filter>
-        </defs>
-        <text
-          class="logo-text"
-          x="50%"
-          y="48"
-          text-anchor="middle"
-          font-family="'Luckiest Guy', cursive"
-          font-size="48"
-          fill="url(#logo-gradient)"
-          stroke="black"
-          stroke-width="3"
-          stroke-linejoin="round"
-          filter="url(#shadow)"
-        >
-          GOOFY BEARS
-        </text>
-      </svg>
-    </header>
 
-    <main id="app-container">
-      <!-- Step 1: Initial Screen -->
-      <div id="step-1" class="step active">
-        <div id="start-quest-button">
-          <!-- Animated Arrow -->
-          <svg
-            class="arrow-svg"
-            viewBox="0 0 100 100"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M10,50 L85,50 M65,30 L85,50 L65,70"
-              fill="none"
-              stroke="black"
-              stroke-width="8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
+#app-container {
+  display: grid;
+  place-items: center;
+  width: 100%;
+}
 
-          <!-- Redesigned Retro Macintosh Style Computer -->
-          <svg
-            class="retro-computer-svg"
-            viewBox="0 0 340 260"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <defs>
-              <filter
-                id="computer-shadow"
-                x="-20%"
-                y="-20%"
-                width="140%"
-                height="140%"
-              >
-                <feOffset result="offOut" in="SourceAlpha" dx="10" dy="10" />
-                <feColorMatrix
-                  result="matrixOut"
-                  in="offOut"
-                  type="matrix"
-                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3 0"
-                />
-                <feBlend
-                  in="SourceGraphic"
-                  in2="matrixOut"
-                  mode="normal"
-                />
-              </filter>
-            </defs>
-            <g filter="url(#computer-shadow)">
-              <!-- Lower Chassis -->
-              <path
-                d="M0,250 L10,210 L330,210 L340,250 Z"
-                fill="#F5EFE6"
-                stroke="#4a403a"
-                stroke-width="3"
-              />
-              <!-- Main Body -->
-              <path
-                d="M30,210 L30,30 Q30,10 50,10 L290,10 Q310,10 310,30 L310,210 Z"
-                fill="#F5EFE6"
-                stroke="#4a403a"
-                stroke-width="3"
-              />
-              <!-- Screen Bezel -->
-              <rect
-                x="60"
-                y="35"
-                width="220"
-                height="150"
-                rx="5"
-                fill="#4a403a"
-              />
-              <!-- Screen -->
-              <rect
-                id="retro-screen"
-                x="70"
-                y="45"
-                width="200"
-                height="130"
-              />
-              <text
-                class="retro-text"
-                x="170"
-                y="118"
-                text-anchor="middle"
-              >
-                TOUCH
-              </text>
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+  /* For Stacking and Transitions */
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  /* Transition Properties */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
 
-              <!-- Floppy Drive Slot -->
-              <rect
-                x="110"
-                y="190"
-                width="120"
-                height="10"
-                fill="#333"
-                stroke="#4a403a"
-                stroke-width="1.5"
-              />
+.step.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
 
-              <!-- Flashing Buttons (Horizontal Chase) -->
-              <circle id="button-1" cx="90" cy="230" r="6" fill="#e57373" stroke="#333" stroke-width="1.5"/>
-              <circle id="button-2" cx="110" cy="230" r="6" fill="#81c784" stroke="#333" stroke-width="1.5"/>
-              <circle id="button-3" cx="130" cy="230" r="6" fill="#64b5f6" stroke="#333" stroke-width="1.5"/>
-              <circle id="button-4" cx="150" cy="230" r="6" fill="#e57373" stroke="#333" stroke-width="1.5"/>
-              <circle id="button-5" cx="170" cy="230" r="6" fill="#81c784" stroke="#333" stroke-width="1.5"/>
-              <circle id="button-6" cx="190" cy="230" r="6" fill="#64b5f6" stroke="#333" stroke-width="1.5"/>
-              <circle id="button-7" cx="210" cy="230" r="6" fill="#e57373" stroke="#333" stroke-width="1.5"/>
-              <circle id="button-8" cx="230" cy="230" r="6" fill="#81c784" stroke="#333" stroke-width="1.5"/>
-              <circle id="button-9" cx="250" cy="230" r="6" fill="#64b5f6" stroke="#333" stroke-width="1.5"/>
-            </g>
-          </svg>
-        </div>
-      </div>
+/* Step 1: Animated Retro Computer Button */
+#start-quest-button {
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.6s ease-in, opacity 0.5s ease-in 0.1s;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-      <!-- Step 2: Password -->
-      <div id="step-2" class="step">
-        <form id="password-form" aria-labelledby="password-heading">
-          <input
-            type="password"
-            id="password-input"
-            placeholder="Enter your password"
-            required
-            aria-label="Password"
-          />
-          <button type="submit">Submit</button>
-        </form>
-      </div>
+#start-quest-button.zooming {
+  transform: scale(5);
+  opacity: 0;
+}
 
-      <!-- Step 3: Tasks -->
-      <div id="step-3" class="step">
-        <form id="task-form" aria-labelledby="task-heading">
-          <button type="button" id="like-retweet-btn" class="yellow">
-            Like & Retweet
-          </button>
-          <div class="checkbox-container">
-            <input type="checkbox" id="task-checkbox" required />
-            <label for="task-checkbox"
-              >I have liked and retweeted the post</label
-            >
-          </div>
-          <input
-            type="text"
-            id="username-input"
-            placeholder="Enter Your @username"
-            required
-          />
-          <input
-            type="text"
-            id="wallet-input"
-            placeholder="Your Wallet Address..."
-            required
-          />
-          <button type="submit">SUBMIT</button>
-        </form>
-      </div>
+.retro-computer-svg {
+  width: 380px;
+  height: auto;
+}
 
-      <!-- Step 4: Success -->
-      <div id="step-4" class="step">
-        <svg
-          class="monster-svg"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-label="Cute monster"
-        >
-          <path
-            d="M21.23,9.45A3.4,3.4,0,0,0,18,10.8a6.3,6.3,0,0,0-12,0,3.4,3.4,0,0,0-3.23-1.35,3.5,3.5,0,0,0,0,7.09,3.4,3.4,0,0,0,3.23-1.35,6.3,6.3,0,0,0,12,0,3.4,3.4,0,0,0,3.23,1.35,3.5,3.5,0,0,0,0-7.09ZM8.5,13.5A1.5,1.5,0,1,1,10,12,1.5,1.5,0,0,1,8.5,13.5Zm7,0A1.5,1.5,0,1,1,17,12,1.5,1.5,0,0,1,15.5,13.5Z"
-            fill="#4ad5e1"
-            stroke="#000"
-            stroke-width="1.5"
-          />
-        </svg>
-        <h1 class="success-title">Submission Successful!</h1>
-        <p class="success-subtitle">Stay tuned</p>
-      </div>
-    </main>
-    <script type="module" src="/index.tsx"></script>
+.arrow-svg {
+  position: absolute;
+  top: 50%;
+  left: -40px; /* Positioned to the left */
+  width: 100px; /* Made larger */
+  height: auto;
+  transform-origin: center;
+  animation: point-horizontal 1.5s infinite ease-in-out;
+  filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.2));
+  z-index: 5;
+  transform: translateY(-50%); /* Initial vertical centering */
+}
 
-    <!-- Sound Effects -->
-    <!-- TODO: Add a valid URL to your audio file in the src attribute -->
-    <audio id="click-sound" preload="auto" src=""></audio>
-    <!-- TODO: Add a valid URL to your audio file in the src attribute -->
-    <audio id="success-sound" preload="auto" src=""></audio>
-    <!-- TODO: Add a valid URL to your audio file in the src attribute -->
-    <audio id="error-sound" preload="auto" src=""></audio>
-    <!-- TODO: Add a valid URL to your audio file in the src attribute -->
-    <audio id="background-music" loop preload="auto" src=""></audio>
-  </body>
-</html>
+@keyframes point-horizontal {
+  0%,
+  100% {
+    transform: translateY(-50%) translateX(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-50%) translateX(20px) rotate(-5deg); /* Moves right and wiggles */
+  }
+}
+
+#retro-screen {
+  fill: #1a1a1a;
+  animation: pulse-retro-screen 2.5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.retro-text {
+  font-family: 'VT323', monospace;
+  font-size: 40px;
+  fill: #39ff14; /* Neon Green */
+  text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none; /* Standard syntax */
+  animation: flicker-text 3s infinite; /* Added flicker */
+}
+
+/* "Space Lights" Flashing Buttons */
+#button-1,
+#button-2,
+#button-3,
+#button-4,
+#button-5,
+#button-6,
+#button-7,
+#button-8,
+#button-9 {
+  animation: chase-light 1.8s infinite;
+  opacity: 0.5; /* Start dim */
+  filter: brightness(0.7);
+  transition: filter 0.2s, opacity 0.2s;
+}
+
+#button-1 {
+  animation-delay: 0s;
+}
+#button-2 {
+  animation-delay: 0.2s;
+}
+#button-3 {
+  animation-delay: 0.4s;
+}
+#button-4 {
+  animation-delay: 0.6s;
+}
+#button-5 {
+  animation-delay: 0.8s;
+}
+#button-6 {
+  animation-delay: 1s;
+}
+#button-7 {
+  animation-delay: 1.2s;
+}
+#button-8 {
+  animation-delay: 1.4s;
+}
+#button-9 {
+  animation-delay: 1.6s;
+}
+
+@keyframes chase-light {
+  0%,
+  20%,
+  100% {
+    opacity: 0.5;
+    filter: brightness(0.7);
+  }
+  10% {
+    opacity: 1;
+    filter: brightness(1.5); /* Enhanced glow effect */
+  }
+}
+
+@keyframes flicker-text {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.9; }
+  52% { opacity: 1; }
+  55% { opacity: 0.85; }
+  57% { opacity: 1; }
+}
+
+
+@keyframes pulse-retro-screen {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 4px rgba(57, 255, 20, 0.6));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgba(57, 255, 20, 1));
+  }
+}
+
+/* Forms */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+input[type='text'],
+input[type='password'] {
+  width: 100%;
+  padding: 1rem;
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 1.5rem;
+  text-align: center;
+  background: white;
+  border: 4px solid black;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0px black;
+  outline: none;
+  transition: box-shadow 0.2s ease-in-out;
+  color: black;
+}
+
+input[type='text']:focus,
+input[type='password']:focus {
+  box-shadow: 0px 0px 0px black;
+  transform: translate(8px, 8px);
+}
+
+form label {
+  font-size: 1.5rem;
+  color: black;
+  text-shadow: 2px 2px 0 white, -2px -2px 0 white, 2px -2px 0 white,
+    -2px 2px 0 white;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.checkbox-container label {
+  font-size: 1.2rem;
+  color: #4a403a;
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.7);
+}
+
+input[type='checkbox'] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 30px;
+  height: 30px;
+  background: white;
+  border: 3px solid black;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 4px 4px 0px black;
+  flex-shrink: 0;
+}
+
+input[type='checkbox']:checked {
+  background-color: #ffeb3b;
+}
+
+input[type='checkbox']:checked::after {
+  content: '✔';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: black;
+  font-size: 1.5rem;
+  animation: pop-in-check 0.3s ease-out; /* Pop-in animation */
+  transform: translate(-50%, -50%) scale(1);
+}
+
+@keyframes pop-in-check {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+button {
+  width: 100%;
+  padding: 1rem;
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 1.5rem;
+  color: black;
+  background: linear-gradient(180deg, #4ad5e1 0%, #ff85b3 100%);
+  border: 4px solid black;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0px black;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-transform: uppercase;
+}
+
+button:hover {
+  transform: translate(4px, 4px);
+  box-shadow: 4px 4px 0px black;
+}
+
+button:active {
+  transform: translate(8px, 8px);
+  box-shadow: 0px 0px 0px black;
+}
+
+button.yellow {
+  background: linear-gradient(180deg, #fdd835 0%, #f57f17 100%);
+}
+
+.like-retweet-animate {
+  animation: like-retweet-animation 0.6s ease-out;
+}
+
+@keyframes like-retweet-animation {
+  0% {
+    transform: translate(8px, 8px) scale(1);
+    box-shadow: 0 0 0 black;
+  }
+  25% {
+    transform: translate(8px, 8px) scale(1.05) rotate(-5deg);
+    box-shadow: 0 0 0 black;
+  }
+  50% {
+    transform: translate(8px, 8px) scale(1.05) rotate(5deg);
+    box-shadow: 0 0 0 black;
+  }
+  75% {
+    transform: translate(8px, 8px) scale(1.05) rotate(-2deg);
+    box-shadow: 0 0 0 black;
+  }
+  100% {
+    transform: translate(4px, 4px) scale(1) rotate(0);
+    box-shadow: 4px 4px 0px black;
+  }
+}
+
+/* Step 4: Success */
+.monster-svg {
+  width: 150px;
+  height: auto;
+  filter: drop-shadow(10px 10px 0px rgba(0, 0, 0, 0.2));
+  animation: bob-monster 2s infinite ease-in-out; /* Added bobbing animation */
+}
+
+@keyframes bob-monster {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.step.active .success-title {
+  animation: fade-in-pop 0.8s ease-out both;
+}
+.step.active .success-subtitle {
+  animation: fade-in-pop 0.8s ease-out 0.2s both;
+}
+
+@keyframes fade-in-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.success-title {
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  color: #4a403a; /* Changed for readability on cream background */
+  text-shadow: 3px 3px 0px rgba(255, 255, 255, 0.7);
+}
+
+.success-subtitle {
+  font-size: 1.8rem;
+  color: #4a403a; /* Changed for readability on cream background */
+  text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.7);
+}
+
+/* Shake Animation for incorrect password */
+.shake {
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(10px);
+  }
+}
+
+/* --- Responsive Design --- */
+
+/* For mobile phones */
+@media (max-width: 480px) {
+  body {
+    padding: 1rem; /* Add some space around the edges */
+  }
+
+  .app-header .logo {
+    width: 250px; /* Make the logo smaller */
+    height: auto;
+  }
+  
+  .step {
+    gap: 1.2rem; /* Reduce space between elements */
+    padding: 0 0.5rem; /* Add horizontal padding inside the step container */
+  }
+
+  /* Make the main retro computer graphic responsive */
+  .retro-computer-svg {
+    width: 100%;
+    max-width: 380px; /* It won't get bigger than this */
+    height: auto;
+  }
+  
+  /* Adjust the pointing arrow for smaller screens */
+  .arrow-svg {
+    width: 60px; /* Make the arrow smaller */
+    left: -15px; /* Move it closer to the computer */
+  }
+
+  /* Adjust font sizes for better readability */
+  .retro-text {
+    font-size: 32px;
+  }
+
+  input[type='text'],
+  input[type='password'],
+  button {
+    font-size: 1.2rem; /* Slightly smaller fonts on inputs/buttons */
+    padding: 0.8rem;
+    border-radius: 15px;
+    border-width: 3px;
+    box-shadow: 6px 6px 0px black;
+  }
+  
+  button:hover {
+    transform: translate(3px, 3px);
+    box-shadow: 3px 3px 0px black;
+  }
+
+  button:active {
+    transform: translate(6px, 6px);
+    box-shadow: 0px 0px 0px black;
+  }
+  
+  .checkbox-container label {
+    font-size: 1rem; /* Smaller checkbox label */
+  }
+
+  .success-title {
+    font-size: 2rem;
+  }
+  
+  .success-subtitle {
+    font-size: 1.5rem;
+  }
+}
+
+/* For very narrow screens */
+@media (max-width: 360px) {
+  .app-header .logo {
+    width: 200px; /* Even smaller logo */
+  }
+    
+  .retro-text {
+    font-size: 28px; /* Further reduce text on screen */
+  }
+
+  .arrow-svg {
+    display: none; /* Hide the arrow on very small screens to prevent clutter */
+  }
+}
