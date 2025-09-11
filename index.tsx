@@ -50,8 +50,8 @@ function playSound(sound: HTMLAudioElement | null) {
   }
 }
 
-const SECRET_PASSWORD = 'kumo'; // You can change this password
-const TWITTER_URL = 'https://x.com/kumoxworld';
+const SECRET_PASSWORD = 'GOOFY'; // You can change this password
+const TWITTER_URL = 'https://x.com/GoofyBears';
 
 let currentStep = 0;
 
