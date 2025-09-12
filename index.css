@@ -19,6 +19,37 @@ body {
   overflow-x: hidden;
 }
 
+#soon-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.soon-text {
+  position: absolute;
+  font-family: 'Luckiest Guy', cursive;
+  color: #4a403a;
+  opacity: 0.15;
+  user-select: none;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(-10vh) rotate(-20deg);
+  }
+  to {
+    transform: translateY(110vh) rotate(20deg);
+  }
+}
+
 .app-header {
   position: absolute;
   top: 1rem;
