@@ -1,6 +1,3 @@
-
-
-
 *,
 *::before,
 *::after {
@@ -12,14 +9,14 @@
 body {
   font-family: 'Luckiest Guy', cursive;
   background-image: none;
-  background-color: #eae3d9; /* New cream background */
+  background-color: #eae3d9;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   text-align: center;
-  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-x: hidden;
 }
 
 .app-header {
@@ -60,10 +57,8 @@ body {
   gap: 1.5rem;
   width: 100%;
   max-width: 400px;
-  /* For Stacking and Transitions */
   grid-column: 1 / -1;
   grid-row: 1 / -1;
-  /* Transition Properties */
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -78,7 +73,6 @@ body {
   transform: translateY(0);
 }
 
-/* Step 1: Animated Retro Computer Button */
 #start-quest-button {
   cursor: pointer;
   position: relative;
@@ -102,14 +96,14 @@ body {
 .arrow-svg {
   position: absolute;
   top: 50%;
-  left: -40px; /* Positioned to the left */
-  width: 100px; /* Made larger */
+  left: -40px;
+  width: 100px;
   height: auto;
   transform-origin: center;
   animation: point-horizontal 1.5s infinite ease-in-out;
   filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.2));
   z-index: 5;
-  transform: translateY(-50%); /* Initial vertical centering */
+  transform: translateY(-50%);
 }
 
 @keyframes point-horizontal {
@@ -118,7 +112,23 @@ body {
     transform: translateY(-50%) translateX(0) rotate(0);
   }
   50% {
-    transform: translateY(-50%) translateX(20px) rotate(-5deg); /* Moves right and wiggles */
+    transform: translateY(-50%) translateX(20px) rotate(-5deg);
+  }
+}
+
+.arrow-svg--right {
+  left: auto;
+  right: -40px;
+  animation-name: point-horizontal-right;
+}
+
+@keyframes point-horizontal-right {
+  0%,
+  100% {
+    transform: translateY(-50%) scaleX(-1) translateX(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-50%) scaleX(-1) translateX(20px) rotate(5deg);
   }
 }
 
@@ -131,15 +141,14 @@ body {
 .retro-text {
   font-family: 'VT323', monospace;
   font-size: 40px;
-  fill: #39ff14; /* Neon Green */
+  fill: #39ff14;
   text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14;
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10+ */
-  user-select: none; /* Standard syntax */
-  animation: flicker-text 3s infinite; /* Added flicker */
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  animation: flicker-text 3s infinite;
 }
 
-/* "Space Lights" Flashing Buttons */
 #button-1,
 #button-2,
 #button-3,
@@ -150,7 +159,7 @@ body {
 #button-8,
 #button-9 {
   animation: chase-light 1.8s infinite;
-  opacity: 0.5; /* Start dim */
+  opacity: 0.5;
   filter: brightness(0.7);
   transition: filter 0.2s, opacity 0.2s;
 }
@@ -192,7 +201,7 @@ body {
   }
   10% {
     opacity: 1;
-    filter: brightness(1.5); /* Enhanced glow effect */
+    filter: brightness(1.5);
   }
 }
 
@@ -215,7 +224,6 @@ body {
   }
 }
 
-/* Forms */
 form {
   display: flex;
   flex-direction: column;
@@ -235,9 +243,34 @@ input[type='password'] {
   border-radius: 20px;
   box-shadow: 8px 8px 0px black;
   outline: none;
-  transition: box-shadow 0.2s ease-in-out;
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out,
+    background-color 0.3s ease;
   color: black;
 }
+
+input[type='text']:not(:placeholder-shown),
+input[type='password']:not(:placeholder-shown) {
+  background-color: #dcedc8;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 40px #dcedc8 inset !important;
+  -webkit-text-fill-color: black !important;
+}
+
+input#wallet-input.invalid {
+  background-color: #ffcdd2;
+}
+input#wallet-input.invalid:-webkit-autofill,
+input#wallet-input.invalid:-webkit-autofill:hover,
+input#wallet-input.invalid:-webkit-autofill:focus,
+input#wallet-input.invalid:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 40px #ffcdd2 inset !important;
+}
+
 
 input[type='text']:focus,
 input[type='password']:focus {
@@ -290,7 +323,7 @@ input[type='checkbox']:checked::after {
   left: 50%;
   color: black;
   font-size: 1.5rem;
-  animation: pop-in-check 0.3s ease-out; /* Pop-in animation */
+  animation: pop-in-check 0.3s ease-out;
   transform: translate(-50%, -50%) scale(1);
 }
 
@@ -330,8 +363,25 @@ button:active {
   box-shadow: 0px 0px 0px black;
 }
 
+button:disabled,
+button:disabled:hover,
+button:disabled:active {
+  background: #e0e0e0;
+  color: #9e9e9e;
+  box-shadow: 8px 8px 0px #bdbdbd;
+  transform: none;
+  cursor: not-allowed;
+}
+
 button.yellow {
   background: linear-gradient(180deg, #fdd835 0%, #f57f17 100%);
+}
+
+button.share-button {
+  background: linear-gradient(180deg, #1da1f2 0%, #1991da 100%);
+  color: white;
+  margin-top: 1rem;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
 }
 
 .like-retweet-animate {
@@ -361,7 +411,6 @@ button.yellow {
   }
 }
 
-/* Image Frames */
 .image-frame {
   position: relative;
   background: white;
@@ -394,7 +443,6 @@ button.yellow {
   display: block;
 }
 
-/* Success Step Frame */
 .image-frame--success::after {
   content: 'CONGRATULATIONS!';
   background: linear-gradient(180deg, #81c784 0%, #4caf50 100%);
@@ -406,7 +454,6 @@ button.yellow {
   display: block;
 }
 
-/* Bobbing Animation */
 @keyframes bob-monster {
   0%,
   100% {
@@ -438,17 +485,16 @@ button.yellow {
 .success-title {
   font-size: 2.5rem;
   letter-spacing: 2px;
-  color: #4a403a; /* Changed for readability on cream background */
+  color: #4a403a;
   text-shadow: 3px 3px 0px rgba(255, 255, 255, 0.7);
 }
 
 .success-subtitle {
   font-size: 1.8rem;
-  color: #4a403a; /* Changed for readability on cream background */
+  color: #4a403a;
   text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.7);
 }
 
-/* Shake Animation for incorrect password */
 .shake {
   animation: shake 0.5s;
 }
@@ -473,38 +519,149 @@ button.yellow {
   }
 }
 
-/* --- Responsive Design --- */
+/* Footer */
+footer {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #4a403a;
+  font-family: sans-serif;
+  font-size: 0.9rem;
+  z-index: 10;
+}
 
-/* For mobile phones */
+footer a {
+  color: #4a403a;
+  text-decoration: none;
+  transition: text-decoration 0.2s ease;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+footer span {
+  margin: 0 0.5rem;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: white;
+  color: #333;
+  padding: 2rem;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  font-family: Arial, sans-serif;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+  transform: scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  font-size: 2.5rem;
+  color: #888;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  box-shadow: none;
+  width: auto;
+}
+
+.modal-close:hover,
+.modal-close:active {
+  color: black;
+  transform: none;
+  box-shadow: none;
+}
+
+#modal-title {
+  font-family: 'Luckiest Guy', cursive;
+  color: black;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  text-align: left;
+}
+
+.modal-body {
+  line-height: 1.6;
+  text-align: left;
+}
+
+.modal-body h3 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.modal-body p {
+  margin-bottom: 1em;
+}
+
 @media (max-width: 480px) {
   body {
-    padding: 1rem; /* Add some space around the edges */
+    padding: 1rem;
   }
 
   .app-header .logo {
-    width: 250px; /* Make the logo smaller */
+    width: 250px;
     height: auto;
   }
-  
+
   .step {
-    gap: 1.2rem; /* Reduce space between elements */
-    padding: 0 0.5rem; /* Add horizontal padding inside the step container */
+    gap: 1.2rem;
+    padding: 0 0.5rem;
   }
 
-  /* Make the main retro computer graphic responsive */
   .retro-computer-svg {
     width: 100%;
-    max-width: 380px; /* It won't get bigger than this */
+    max-width: 380px;
     height: auto;
   }
-  
-  /* Adjust the pointing arrow for smaller screens */
+
   .arrow-svg {
-    width: 60px; /* Make the arrow smaller */
-    left: -15px; /* Move it closer to the computer */
+    width: 60px;
+    left: -15px;
   }
 
-  /* Adjust font sizes for better readability */
+  .arrow-svg--right {
+    left: auto;
+    right: -15px;
+  }
+
   .retro-text {
     font-size: 32px;
   }
@@ -512,13 +669,13 @@ button.yellow {
   input[type='text'],
   input[type='password'],
   button {
-    font-size: 1.2rem; /* Slightly smaller fonts on inputs/buttons */
+    font-size: 1.2rem;
     padding: 0.8rem;
     border-radius: 15px;
     border-width: 3px;
     box-shadow: 6px 6px 0px black;
   }
-  
+
   button:hover {
     transform: translate(3px, 3px);
     box-shadow: 3px 3px 0px black;
@@ -528,31 +685,40 @@ button.yellow {
     transform: translate(6px, 6px);
     box-shadow: 0px 0px 0px black;
   }
-  
+
   .checkbox-container label {
-    font-size: 1rem; /* Smaller checkbox label */
+    font-size: 1rem;
   }
 
   .success-title {
     font-size: 2rem;
   }
-  
+
   .success-subtitle {
+    font-size: 1.5rem;
+  }
+
+  footer {
+    font-size: 0.8rem;
+  }
+  .modal-content {
+    padding: 1.5rem;
+  }
+  #modal-title {
     font-size: 1.5rem;
   }
 }
 
-/* For very narrow screens */
 @media (max-width: 360px) {
   .app-header .logo {
-    width: 200px; /* Even smaller logo */
+    width: 200px;
   }
-    
+
   .retro-text {
-    font-size: 28px; /* Further reduce text on screen */
+    font-size: 28px;
   }
 
   .arrow-svg {
-    display: none; /* Hide the arrow on very small screens to prevent clutter */
+    display: none;
   }
 }
