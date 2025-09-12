@@ -285,7 +285,7 @@ function createFallingSoons() {
     soonEl.style.left = `${Math.random() * 100}vw`;
     soonEl.style.fontSize = `${Math.random() * 2 + 1}rem`; // 1rem to 3rem
     soonEl.style.animationDuration = `${Math.random() * 10 + 8}s`; // 8s to 18s
-    soonEl.style.animationDelay = `${Math.random() * 15}s`;
+    soonEl.style.animationDelay = `-${Math.random() * 15}s`;
 
     container.appendChild(soonEl);
   }
