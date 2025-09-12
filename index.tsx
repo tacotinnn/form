@@ -271,6 +271,26 @@ function closeModal() {
   if (modalOverlay) modalOverlay.classList.remove('active');
 }
 
+// FALLING 'SOON' TEXTS
+function createFallingSoons() {
+  const container = document.getElementById('soon-container');
+  if (!container) return;
+
+  const count = 20;
+  for (let i = 0; i < count; i++) {
+    const soonEl = document.createElement('span');
+    soonEl.classList.add('soon-text');
+    soonEl.textContent = 'SOON';
+
+    soonEl.style.left = `${Math.random() * 100}vw`;
+    soonEl.style.fontSize = `${Math.random() * 2 + 1}rem`; // 1rem to 3rem
+    soonEl.style.animationDuration = `${Math.random() * 10 + 8}s`; // 8s to 18s
+    soonEl.style.animationDelay = `${Math.random() * 15}s`;
+
+    container.appendChild(soonEl);
+  }
+}
+
 if (logoHeader) {
   logoHeader.addEventListener('click', () => {
     if (!steps[0].classList.contains('active')) {
@@ -390,5 +410,6 @@ document.querySelectorAll('button').forEach(button => {
 });
 
 showStep(0);
+createFallingSoons();
 
 export {};
