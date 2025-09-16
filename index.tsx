@@ -8,6 +8,9 @@ const startButton = document.getElementById(
 ) as HTMLDivElement;
 const logoHeader = document.getElementById('logo-header') as HTMLElement;
 
+const loaderContainer = document.getElementById('loader-container') as HTMLDivElement;
+const loaderBar = document.querySelector('.loader-bar') as HTMLDivElement;
+
 const passwordForm = document.getElementById('password-form') as HTMLFormElement;
 const passwordInput = document.getElementById(
   'password-input',
@@ -409,7 +412,27 @@ document.querySelectorAll('button').forEach(button => {
   button.addEventListener('mousedown', () => playSound(clickSound));
 });
 
-showStep(0);
-createFallingSoons();
+function initApp() {
+  showStep(0);
+  createFallingSoons();
+}
+
+window.addEventListener('load', () => {
+  if (loaderContainer && loaderBar) {
+    // Start the loading bar animation shortly after load to ensure render
+    setTimeout(() => {
+      loaderBar.style.width = '100%';
+    }, 100);
+
+    // Hide the loader after the bar is filled
+    setTimeout(() => {
+      loaderContainer.classList.add('hidden');
+      initApp(); // Initialize the main app after loader is gone
+    }, 2000); // 1.5s for the bar + some buffer + 0.5s fade out
+  } else {
+    // Fallback if loader elements are not found
+    initApp();
+  }
+});
 
 export {};
