@@ -59,9 +59,12 @@ body {
   cursor: pointer;
 }
 
-.logo-text {
+.logo {
+  width: 250px;
+  height: auto;
   animation: float-logo 3s ease-in-out infinite;
   transform-origin: center;
+  filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.3));
 }
 
 @keyframes float-logo {
@@ -458,6 +461,57 @@ button.share-button {
   }
 }
 
+/* Loader Styles */
+#loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #eae3d9;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease-out 0.2s, visibility 0.5s ease-out 0.2s;
+  gap: 2rem;
+}
+
+#loader-container.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader-logo {
+  width: 320px;
+  max-width: 70%;
+  height: auto;
+  animation: float-logo 3s ease-in-out infinite;
+  filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.3));
+}
+
+.loader-bar-container {
+  width: 80%;
+  max-width: 350px;
+  height: 30px;
+  background: white;
+  border: 4px solid black;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0px black;
+  padding: 4px;
+  overflow: hidden;
+}
+
+.loader-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(180deg, #fdd835 0%, #f57f17 100%);
+  border-radius: 12px;
+  transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
 /* Footer */
 footer {
   position: absolute;
@@ -576,8 +630,7 @@ footer span {
   }
 
   .app-header .logo {
-    width: 250px;
-    height: auto;
+    width: 200px;
   }
 
   .step {
@@ -645,7 +698,7 @@ footer span {
 
 @media (max-width: 360px) {
   .app-header .logo {
-    width: 200px;
+    width: 180px;
   }
 
   .arrow-svg {
