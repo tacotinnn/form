@@ -133,7 +133,7 @@ function playSound(sound: HTMLAudioElement | null) {
 }
 
 const SECRET_PASSWORD = 'goofy';
-const TWITTER_URL = 'https://x.com/BearsGoofy';
+const TWITTER_URL = 'https://x.com/BearsGoofy/status/1968428910133010910';
 const SHARE_TEXTS = [
   'I’ve just joined the @BearsGoofy waitlist! 🐻  Excited for what’s coming next. ✨ #GoofyBearsNFT',
   'Made it onto the @BearsGoofy waitlist 🐻 Can’t wait for the journey ahead! 🔥 #GoofyBearsNFT',
